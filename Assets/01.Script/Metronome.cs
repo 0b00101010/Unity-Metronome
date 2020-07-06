@@ -28,7 +28,7 @@ public class Metronome : MonoBehaviour
         double offsetForSample = offset * audioSource.clip.frequency;
         oneBeatTime = (60.0 / bpm);
 
-        nextSample = oneBeatTime * audioSource.clip.frequency - offsetForSample;
+        nextSample = offsetForSample;
 
         audioSource.clip.frequency.Log();
         audioSource.clip.samples.Log();
@@ -37,7 +37,7 @@ public class Metronome : MonoBehaviour
     }
 
     private void Update(){
-        audioSource.timeSamples.Log();
+        (audioSource.timeSamples / audioSource.clip.frequency).Log();
         if(audioSource.timeSamples >= nextSample){
             StartCoroutine(TicSFX());
         }
