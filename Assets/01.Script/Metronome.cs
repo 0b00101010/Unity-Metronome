@@ -11,20 +11,25 @@ public class Metronome : MonoBehaviour
     [SerializeField]
     private AudioSource ticSource;
 
-    [Header("Values")]
+    [Header("Song")]
     [SerializeField]
-    private double offset;
+    private SongData selectSong;
 
-    [SerializeField]
+    private double offset;
     private double bpm;
 
-    [SerializeField]
     private int split;
 
     private double oneBeatTime;
     private double nextSample;
 
     private void Awake(){
+        audioSource.clip = selectSong.audioClip;
+        
+        offset = selectSong.offset;
+        bpm = selectSong.bpm;
+        split = selectSong.split;
+
         double offsetForSample = offset * audioSource.clip.frequency;
         oneBeatTime = (60.0 / bpm);
 
@@ -34,6 +39,8 @@ public class Metronome : MonoBehaviour
         audioSource.clip.samples.Log();
         
         (audioSource.clip.samples / audioSource.clip.frequency).Log();
+
+        audioSource.Play();
     }
 
     private void Update(){
