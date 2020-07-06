@@ -37,7 +37,7 @@ public class Metronome : MonoBehaviour
     }
 
     private void Update(){
-        (audioSource.timeSamples / audioSource.clip.frequency).Log();
+        ((float)audioSource.timeSamples / (float)audioSource.clip.frequency).Log();
         if(audioSource.timeSamples >= nextSample){
             StartCoroutine(TicSFX());
         }
