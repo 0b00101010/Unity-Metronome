@@ -7,8 +7,6 @@ public class Metronome : MonoBehaviour
     [Header("Objects")]
     [SerializeField]
     private AudioSource audioSource;
-
-    [SerializeField]
     private AudioSource ticSource;
 
     [Header("Song")]
@@ -24,11 +22,11 @@ public class Metronome : MonoBehaviour
     private double nextSample;
 
     private void Awake(){
+        ticSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = selectSong.audioClip;
         
         offset = selectSong.offset;
         bpm = selectSong.bpm;
-        split = selectSong.split;
 
         double offsetForSample = offset * audioSource.clip.frequency;
         oneBeatTime = (60.0 / bpm);
