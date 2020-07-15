@@ -13,6 +13,8 @@ public class Metronome : MonoBehaviour
     [SerializeField]
     private SongData selectSong;
 
+    private Vector3Int rotateAngle;
+
     private double offset;
     private double bpm;
 
@@ -22,6 +24,9 @@ public class Metronome : MonoBehaviour
     private double nextSample;
 
     private void Awake(){
+        rotateAngle = Vector3Int.zero;
+        rotateAngle.z = 90;
+
         ticSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = selectSong.audioClip;
         
@@ -51,7 +56,7 @@ public class Metronome : MonoBehaviour
     private IEnumerator TicSFX(){
         ticSource.Play();
         nextSample += oneBeatTime * audioSource.clip.frequency;
-
+        gameObject.transform.Rotate(rotateAngle);
         yield return null;
     }
 }
